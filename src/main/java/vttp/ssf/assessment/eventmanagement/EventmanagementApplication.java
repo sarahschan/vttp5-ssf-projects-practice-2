@@ -37,8 +37,12 @@ public class EventmanagementApplication implements CommandLineRunner{
 		for (Event event : events) {
 			redisRepo.saveRecord(event);
 		}
-		
+
 		System.out.println("All events saved to redis");
+
+
+		Event event = redisRepo.getEvent(1);
+		System.out.println(event);
 		
 	}
 	
