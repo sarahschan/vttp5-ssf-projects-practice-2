@@ -50,12 +50,7 @@ public class DatabaseService {
 
             
             // Create an event POJO using the extracted details
-            Event event = new Event();
-                event.setEventId(eventId);
-                event.setEventName(eventName);
-                event.setEventSize(eventSize);
-                event.setEventDate(eventDate);
-                event.setParticipants(participants);
+            Event event = new Event(eventId, eventName, eventSize, eventDate, participants);
 
             // add it to List<Event> events
             events.add(event);
@@ -65,4 +60,6 @@ public class DatabaseService {
         return events;
 
     }
+
+
 }

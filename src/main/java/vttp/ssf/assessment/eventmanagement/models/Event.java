@@ -1,5 +1,8 @@
 package vttp.ssf.assessment.eventmanagement.models;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 public class Event {
     
@@ -8,6 +11,7 @@ public class Event {
     private Integer eventSize;
     private Long eventDate; // event date in epoch miliseconds
     private Integer participants;
+    private LocalDate formattedDate;
 
     
     public Event() {
@@ -19,12 +23,18 @@ public class Event {
         this.eventSize = eventSize;
         this.eventDate = eventDate;
         this.participants = participants;
+        this.formattedDate = dateConverter(eventDate);
     }
-
+        
+            
+    private LocalDate dateConverter(Long eventDate) {
+        return LocalDate.ofInstant(Instant.ofEpochMilli(eventDate), ZoneId.systemDefault());
+    }
+    
     
     @Override
     public String toString() {
-        return eventId + "," + eventName + "," + eventSize + "," + eventDate + ", " + participants;
+        return eventId + "," + eventName + "," + eventSize + "," + eventDate + ", " + participants +  "," + formattedDate;
     }
 
 
@@ -66,6 +76,14 @@ public class Event {
 
     public void setParticipants(Integer participants) {
         this.participants = participants;
+    }
+
+    public LocalDate getFormattedDate() {
+        return formattedDate;
+    }
+
+    public void setFormattedDate(LocalDate formattedDate) {
+        this.formattedDate = formattedDate;
     }
 
     

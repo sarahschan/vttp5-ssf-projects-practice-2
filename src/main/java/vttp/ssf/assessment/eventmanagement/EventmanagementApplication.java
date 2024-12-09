@@ -32,6 +32,10 @@ public class EventmanagementApplication implements CommandLineRunner{
 	
 		// Use readFile() in DatabaseService to return a List<Event>
 		List<Event> events = databaseService.readFile("events.json");
+		System.out.println("All events read from file to List<Event> events");
+			// for (Event event : events) {
+			// 	System.out.println(event);
+			// }
 
 		// Use saveRecord() in RedisRepository to save the events to redis
 		for (Event event : events) {
@@ -40,9 +44,6 @@ public class EventmanagementApplication implements CommandLineRunner{
 
 		System.out.println("All events saved to redis");
 
-
-		Event event = redisRepo.getEvent(1);
-		System.out.println(event);
 		
 	}
 	
