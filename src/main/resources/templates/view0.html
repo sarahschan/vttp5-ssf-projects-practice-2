@@ -10,7 +10,7 @@
 <body class="container">
 
     <div>
-        <p>this is view0.html</p>
+        <br>
         <h1>List of events</h1>
     </div>
 
@@ -30,7 +30,7 @@
                     <td th:text="${event.eventName}"></td>
                     <td th:text="${event.eventSize}"></td>
                     <td th:text="${#temporals.format(event.formattedDate, 'dd-MM-yyyy')}"></td>
-                    <td><a class="btn btn-primary" th:href="@{/register/{event.Id}(event.Id=${event.eventId})}">Register</a></td>
+                    <td><a class="btn btn-primary" th:href="@{/event/register/{event.Id}(event.Id=${event.eventId})}">Register</a></td>
                 </tr>
             </tbody>
         </table>

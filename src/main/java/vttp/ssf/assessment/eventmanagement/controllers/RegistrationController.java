@@ -16,13 +16,13 @@ import vttp.ssf.assessment.eventmanagement.models.RegistrationForm;
 import vttp.ssf.assessment.eventmanagement.repositories.RedisRepository;
 
 @Controller
-@RequestMapping("/register")
+@RequestMapping()
 public class RegistrationController {
     
     @Autowired
     RedisRepository redisRepository;
 
-    @GetMapping("/{eventId}")
+    @GetMapping("/event/register/{eventId}")
     public String registrationPage(@PathVariable("eventId") Integer eventId, Model model){
 
         Event event = redisRepository.getEvent(eventId);
@@ -35,17 +35,46 @@ public class RegistrationController {
     }
 
 
-    @PostMapping("/{eventId}")
+    @PostMapping("/event/register/{eventId}")
     public String handleRegistration(@PathVariable("eventId") Integer eventId, @Valid @ModelAttribute("form") RegistrationForm form, BindingResult result, Model model){
         
+        Event event = redisRepository.getEvent(eventId);
+
         if (result.hasErrors()) {
-            Event event = redisRepository.getEvent(eventId);
             model.addAttribute("event", event);
             model.addAttribute("form", form);
             return "eventRegister";
         }
 
-        return "redirect:/events/listing";
+        // Check if there is enough space in the event
+        int availableSpots = event.getEventSize() - event.getParticipants();
+        int requestedTickets = form.getTicketsRequested();
+            // System.out.println("Spots available: " + availableSpots);
+            // System.out.println("Requested tickets: " + requestedTickets);
+
+        // If there are enough spots
+        if (availableSpots >= requestedTickets) {
+            return "redirect:/registration/register/" + eventId;
+
+        } else {
+            return "redirect:/registration/registererror/" + eventId;
+        }
+
+    }
+
+
+    @GetMapping("/registration/register/{eventId}")
+    public String successfulRegistration(@PathVariable("eventId") Integer eventId, Model model){
+        Event event = redisRepository.getEvent(eventId);
+        model.addAttribute("event", event);
+        return "successRegistration.html";
+    }
+
+    @GetMapping("/registration/registererror/{eventId}")
+    public String errorRegistration(@PathVariable("eventId") Integer eventId, Model model){
+        Event event = redisRepository.getEvent(eventId);
+        model.addAttribute("event", event);
+        return "errorRegistration.html";
     }
 
 }

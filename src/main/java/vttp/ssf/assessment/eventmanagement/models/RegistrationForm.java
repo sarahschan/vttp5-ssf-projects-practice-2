@@ -17,7 +17,7 @@ import validation.ValidAge;
 public class RegistrationForm {
     
         @NotBlank(message = "Name is mandatory") 
-        @Size(min = 5, max = 25, message = "Name must be between 3 and 20 characters")
+        @Size(min = 5, max = 25, message = "Name must be between 5 and 25 characters")
         @Pattern(regexp = "^[a-zA-Z@\\-\\s]*$", message = "Name can only contain alphabets, spaces, '@', or '-'")
     private String fullName;
 

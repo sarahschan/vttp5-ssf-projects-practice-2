@@ -10,7 +10,7 @@
 <body class="container">
 
     <div>
-        <p>this is eventRegister.html</p>
+        <br>
         <h1>Register event</h1>
     </div>
 
@@ -26,7 +26,7 @@
 
     <div>
 
-        <form method="POST" th:action="@{/register/{eventId}(eventId=${event.eventId})}" th:object="${form}">
+        <form method="POST" th:action="@{/event/register/{eventId}(eventId=${event.eventId})}" th:object="${form}">
 
             <div class="mb-3">
                 <label class="form-label">Full Name</label>
