@@ -54,6 +54,15 @@ public class RegistrationController {
 
         // If there are enough spots
         if (availableSpots >= requestedTickets) {
+
+            // update the number of participants for the event
+            int updatedParticipants = event.getParticipants() + requestedTickets;
+            event.setParticipants(updatedParticipants);
+                // System.out.println(event.getParticipants());
+
+            // save the new event data to redis
+            redisRepository.saveRecord(event);
+
             return "redirect:/registration/register/" + eventId;
 
         } else {
@@ -73,7 +82,10 @@ public class RegistrationController {
     @GetMapping("/registration/registererror/{eventId}")
     public String errorRegistration(@PathVariable("eventId") Integer eventId, Model model){
         Event event = redisRepository.getEvent(eventId);
+        int ticketsLeft = event.getEventSize() - event.getParticipants();
+
         model.addAttribute("event", event);
+        model.addAttribute("ticketsLeft", ticketsLeft);
         return "errorRegistration.html";
     }
 

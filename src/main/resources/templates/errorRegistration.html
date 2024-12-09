@@ -18,6 +18,8 @@
 
         <p>Your request for tickets exceeded the event size</p>
 
+        <p>There are only <span th:text="${ticketsLeft}"></span> tickets left.</p>
+
         <a class="btn btn-secondary" th:href="@{/events/listing}">Back to Event Listing</a>
 
     </div>
