@@ -18,12 +18,55 @@
 
     <div>
         <p>You have chosen to register for the following event</p>
-        <p th:text="${event.eventName}"></p>
-        <p th:text="${#temporals.format(event.formattedDate, 'dd-MM-yyyy')}"></p>
+        <h3 th:text="${event.eventName}"></h3>
+        <h3 th:text="${#temporals.format(event.formattedDate, 'dd-MM-yyyy')}"></h3>
     </div>
 
+    <br>
+
     <div>
-        <p>form here</p>
+
+        <form method="POST" th:action="@{/register/{eventId}(eventId=${event.eventId})}" th:object="${form}">
+
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" name="fullName" th:field="*{fullName}">
+            </div>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></div>
+
+            <div class="mb-3">
+                <label class="form-label">DOB</label>
+                <input type="date" class="form-control" name="dob" th:field="*{dob}" min="0000-01-01" max="9999-12-31">
+            </div>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"></div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="text" class="form-control" name="email" th:field="*{email}">
+            </div>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
+            <div class="mb-3">
+                <label class="form-label">Mobile No</label>
+                <input type="text" class="form-control" name="phone" th:field="*{phone}">
+            </div>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+
+            <div class="mb-3">
+                <label class="form-label">Number of Tickets</label>
+                <input type="number" step="1" class="form-control" name="ticketsRequested" th:field="*{ticketsRequested}">
+            </div>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('ticketsRequested')}" th:errors="*{ticketsRequested}"></div>
+
+            <br>
+
+            <span>
+                <button type="submit" class="btn btn-primary">Register</button>
+                &nbsp;&nbsp;&nbsp;
+                <a class="btn btn-secondary" th:href="@{/events/listing}">Cancel</a>
+            </span>
+        </form>
+
     </div>
     
 </body>
