@@ -1,6 +1,8 @@
 package vttp.ssf.assessment.eventmanagement.controllers;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,13 @@ public class EventController {
 	public String displayEvents(Model model){
 
 		List<Event> events = redisRepository.getAllEvents();
-		model.addAttribute("events", events);
+
+		// sort by eventId
+		List<Event> sortedList = events.stream()
+									.sorted(Comparator.comparing(Event::getEventId))
+									.collect(Collectors.toList());
+
+		model.addAttribute("events", sortedList);
 		
 		return "view0";
 	}
