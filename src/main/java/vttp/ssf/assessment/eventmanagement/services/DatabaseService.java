@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
@@ -23,6 +24,8 @@ public class DatabaseService {
         
         // Read file using file reader
         File eventsFile = new File(fileName);
+
+        // File eventsFile = ResourceUtils.getFile(fileName);
 
         if (!eventsFile.exists() || !eventsFile.isFile()){
             throw new FileNotFoundException();
