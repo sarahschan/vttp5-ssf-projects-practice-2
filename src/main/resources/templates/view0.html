@@ -29,7 +29,7 @@
                     <td th:text="${event.eventId}"></td>
                     <td th:text="${event.eventName}"></td>
                     <td th:text="${event.eventSize}"></td>
-                    <td th:text="${event.formattedDate}"></td>
+                    <td th:text="${#temporals.format(event.formattedDate, 'dd-MM-yyyy')}"></td>
                     <td th:text="${event.participants}"></td>
                 </tr>
             </tbody>
