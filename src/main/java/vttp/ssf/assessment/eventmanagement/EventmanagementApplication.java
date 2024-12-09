@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import vttp.ssf.assessment.eventmanagement.models.Event;
+import vttp.ssf.assessment.eventmanagement.repositories.RedisRepository;
 import vttp.ssf.assessment.eventmanagement.services.DatabaseService;
 
 @SpringBootApplication
@@ -16,6 +17,9 @@ public class EventmanagementApplication implements CommandLineRunner{
 
 	@Autowired
 	DatabaseService databaseService;
+
+	@Autowired
+	RedisRepository redisRepo;
 
 
 	public static void main(String[] args) {
@@ -28,10 +32,13 @@ public class EventmanagementApplication implements CommandLineRunner{
 	
 		// Use readFile() in DatabaseService to return a List<Event>
 		List<Event> events = databaseService.readFile("events.json");
-			// for (Event event : events) {
-			// 	System.out.println(event);
-			// }
 
+		// Use saveRecord() in RedisRepository to save the events to redis
+		for (Event event : events) {
+			redisRepo.saveRecord(event);
+		}
+		
+		System.out.println("All events saved to redis");
 		
 	}
 	
