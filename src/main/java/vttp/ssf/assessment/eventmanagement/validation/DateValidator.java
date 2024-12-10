@@ -1,4 +1,4 @@
-package validation;
+package vttp.ssf.assessment.eventmanagement.validation;
 
 import java.time.LocalDate;
 
@@ -17,7 +17,7 @@ public class DateValidator implements ConstraintValidator<ValidAge, LocalDate> {
         int year = dob.getYear();
         if (year > 9999 || year < 1000) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Year must be a 4-digit number")
+            context.buildConstraintViolationWithTemplate("No way that is your age!")
                    .addConstraintViolation();
             return false;
         }

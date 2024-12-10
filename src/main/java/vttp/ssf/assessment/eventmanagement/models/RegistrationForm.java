@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import validation.ValidAge;
+import vttp.ssf.assessment.eventmanagement.validation.ValidAge;
 
 public class RegistrationForm {
     

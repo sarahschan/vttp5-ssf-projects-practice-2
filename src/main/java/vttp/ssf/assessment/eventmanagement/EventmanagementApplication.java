@@ -33,9 +33,6 @@ public class EventmanagementApplication implements CommandLineRunner{
 		// Use readFile() in DatabaseService to return a List<Event>
 		List<Event> events = databaseService.readFile("events.json");
 
-		// List<Event> events = databaseService.readFile("classpath:data/events.json");
-
-
 		System.out.println("All events read from file to List<Event> events");
 			// for (Event event : events) {
 			// 	System.out.println(event);

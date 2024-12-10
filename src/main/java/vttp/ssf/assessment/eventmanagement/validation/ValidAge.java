@@ -1,4 +1,4 @@
-package validation;
+package vttp.ssf.assessment.eventmanagement.validation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
